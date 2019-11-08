@@ -5,8 +5,9 @@ import { PartComponent } from '../app/part/part.component';
 
 
 const routes: Routes = [
-  {
-    path: 'part/:id', component: PartComponent }
+    {path: 'part/:id', component: PartComponent },
+    { path: 'home', component: CarComponentComponent },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
