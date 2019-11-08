@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, HostListener } from '@angular/core';
+import { Router} from "@angular/router";
 import * as THREE from 'three-full';
 
 @Component({
@@ -13,6 +14,7 @@ export class CarComponentComponent implements AfterViewInit {
   private cameraTarget: THREE.Vector3;
   public scene: THREE.Scene;
   public loader: THREE.ColladaLoader;
+  public router:Router;
 
   public fieldOfView: number = 60;
   public nearClippingPane: number = 1;
@@ -23,8 +25,9 @@ export class CarComponentComponent implements AfterViewInit {
   @ViewChild('canvas', {static: false})
   private canvasRef: ElementRef;
 
-  constructor() {
+  constructor(router:Router) {
       this.render = this.render.bind(this);
+      this.router = router;
       this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
   }
 
@@ -135,6 +138,7 @@ export class CarComponentComponent implements AfterViewInit {
       console.log("Scene has " + this.scene.children + " objects");
       console.log(intersects.length + " intersected objects found");
       console.log(intersects[0].object.name);
+      this.router.navigate(['part/'+intersects[0].object.name]);
       //intersects.forEach((i) => {
      //     console.log(i.object); // do what you want to do with object
     //  });
