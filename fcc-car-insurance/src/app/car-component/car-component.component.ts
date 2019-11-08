@@ -12,6 +12,7 @@ export class CarComponentComponent implements AfterViewInit {
   private camera: THREE.PerspectiveCamera;
   private cameraTarget: THREE.Vector3;
   public scene: THREE.Scene;
+  public loader: THREE.ColladaLoader;
 
   public fieldOfView: number = 60;
   public nearClippingPane: number = 1;
@@ -37,8 +38,8 @@ export class CarComponentComponent implements AfterViewInit {
       const textureLoader = new THREE.TextureLoader();
       const bgTexture = textureLoader.load('../assets/model/car_parking.jpg' );
       this.scene.background = bgTexture;
-      var loader = new THREE.ColladaLoader();
-      loader.load('assets/model/multimaterial.dae', this.onModelLoadingCompleted);
+      this.loader = new THREE.ColladaLoader();
+      this.loader.load('assets/model/Car.dae', this.onModelLoadingCompleted);
   }
 
   private onModelLoadingCompleted(collada) {
@@ -128,9 +129,9 @@ export class CarComponentComponent implements AfterViewInit {
 
       var obj: THREE.Object3D[] = [];
       this.findAllObjects(obj, this.scene);
-      var intersects = raycaster.intersectObjects(obj);
-      console.log("Scene has " + obj.length + " objects");
-      console.log(intersects.length + " intersected objects found")
+      var intersects = raycaster.intersectObjects(this.scene.children, true );
+      console.log("Scene has " + this.scene.children + " objects");
+      console.log(intersects.length + " intersected objects found");
       intersects.forEach((i) => {
           console.log(i.object); // do what you want to do with object
       });
