@@ -1,1 +1,6 @@
-<p>part works! {{carPart}}</p>
+<p>part works! {{carPartName}}</p>
+<div *ngFor="let part of (carPartsFiltered | async) | slice:0:1">
+    <img src={{part.partPictureUrl}}/>
+</div>
+
+
