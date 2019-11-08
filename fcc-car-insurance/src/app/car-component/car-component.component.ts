@@ -39,7 +39,9 @@ export class CarComponentComponent implements AfterViewInit {
       const bgTexture = textureLoader.load('../assets/model/car_parking.jpg' );
       this.scene.background = bgTexture;
       this.loader = new THREE.ColladaLoader();
-      this.loader.load('assets/model/Car.dae', this.onModelLoadingCompleted);
+      this.loader.load('assets/model/ShelbyWD.dae', this.onModelLoadingCompleted);
+      //////////////////////////////
+      /////////////////////////////
   }
 
   private onModelLoadingCompleted(collada) {
@@ -132,9 +134,10 @@ export class CarComponentComponent implements AfterViewInit {
       var intersects = raycaster.intersectObjects(this.scene.children, true );
       console.log("Scene has " + this.scene.children + " objects");
       console.log(intersects.length + " intersected objects found");
-      intersects.forEach((i) => {
-          console.log(i.object); // do what you want to do with object
-      });
+      console.log(intersects[0].object.name);
+      //intersects.forEach((i) => {
+     //     console.log(i.object); // do what you want to do with object
+    //  });
 
   }
 
